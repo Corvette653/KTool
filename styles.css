@@ -1,0 +1,118 @@
+@font-face {
+	font-family: 'RageItalic';
+	src: url('./RageItalic.eot');
+	src: local('RageItalic'), url('./RageItalic.woff') format('woff'), url('./RageItalic.ttf') format('truetype');
+}
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+/* HEADER */
+header {
+	background-color: blue;
+	margin-bottom: 10px;
+	padding-top: 10px;
+	padding-left: 10px;
+	color: orange;
+}
+header h1 {
+	font-family: 'RageItalic';
+	font-size: 10vw;
+	display: inline;
+}
+header .menuButton {
+	font-family: "Times New Roman", Times, serif;
+	font-size: 20px;
+	float: right;
+	margin-top: 25px;
+	margin-right: 20px;
+	width: 100px;
+	text-align: center;
+	font-weight: bold;
+}
+header .menuButton:hover {
+	background-color: orange;
+	color: white;
+	cursor: pointer;
+}
+header .openedMenu {
+	background-color: orange;
+	color: white;
+	position: absolute;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	top: 53px;
+	width: 100px;
+	text-align: center;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 20px;
+}
+header .openedMenu div:hover {
+	color: orange;
+	background-color: blue;
+	cursor: pointer;
+}
+#openedMenu3 {
+	right: 260px;
+}
+#openedMenu2 {
+	right: 140px;
+}
+#openedMenu1 {
+	right: 20px;
+}
+
+@media (min-width: 800px) {
+	header h1 {
+		font-size: 80px;
+	}
+}
+.hidden {
+	display: none !important;
+}
+
+/* TABLE*/
+textarea {
+	width: 100%;
+	text-align: center;
+	height: 20px;
+	resize: none;
+	overflow: hidden;
+}
+table {
+	border-collapse: collapse;
+	margin-left: 10px;
+}
+th, td {
+	width: 20px;
+}
+th textarea {
+	background-color: #fff2b0;
+}
+.h4 {
+	height: 130px;
+	width: 100px;
+}
+.h2 {
+	height: 50px;
+}
+.h10 {
+	height: 200px;
+}
+.h1_5 {
+	height: 30px;
+}
+.WP {
+	width: 70px;
+}
+.NS {
+	width: 100px;
+}
+.RC {
+	width: 20px;
+}
+.Czynnosc {
+	height: 60px;
+}
