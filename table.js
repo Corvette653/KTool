@@ -1,22 +1,19 @@
 var tbl = document.getElementById("myTable");
 
 function DodajCzynnosc(){
-	var czynnosc = prompt("Nazwa procesu do którego dodać czynność:");
+	var proces = prompt("Nazwa procesu do którego dodać czynność:");
 	var nrProcesu = -1;
 	var nrCzynnosci = 0;
 
-	if (czynnosc == null){ // Użytkownik w komunikacie kliknął anuluj
+	if (proces == null){ // Użytkownik w komunikacie kliknął anuluj
 		return;
 	}
 
 	for (var i=1; i<tbl.rows[0].cells.length; i++){
-		if (tbl.rows[0].cells[i].querySelector("textarea").value == czynnosc){ // Szukanie procesu
+		if (tbl.rows[0].cells[i].querySelector("textarea").value == proces){ // Szukanie procesu
 			nrProcesu = i;
-			console.log("Proces:" + nrProcesu)
 			for (var j = i; j > 0; j--){
 				nrCzynnosci += tbl.rows[0].cells[j].colSpan/7;
-				console.log("j" + j)
-				console.log("Czynnosc:" + nrCzynnosci);
 			}
 			break;
 		}
@@ -147,6 +144,12 @@ function DodajProces() {
 }
 
 function DodajStanowisko() {
+	var querySelector = "#myTable tr:nth-child(" + (tbl.rows.length + 1).toString() + ") th textarea";
+
+	var position = document.createElement("option");
+	position.text = "Stanowisko";
+	document.querySelector("select").add(position);
+
 	var cell;
 	var row = tbl.insertRow();
 	row.innerHTML += '<th rowspan="10"><textarea class="h10">Stanowisko</textarea></th>'; // Dodanie nagłówka z nazwą stanowiska
@@ -165,6 +168,8 @@ function DodajStanowisko() {
 			cell.innerHTML = '<textarea></textarea>'; // Dodanie komórek na rodzaje czynności
 		}
 	}
+	
+	document.querySelector(querySelector).addEventListener("change", StanowiskoChanged, false);
 }
 
 function KopiujStanowisko() {
@@ -202,8 +207,128 @@ function KopiujStanowisko() {
 	}
 }
 
+function UsuwanieCzynnosci(nrCzynnosci){
+	var nrProcesu = 0;
+
+	if (nrCzynnosci == -1){
+		alert("Nie znaleziono czynnosci!");
+		return;
+	}
+
+	for (var i=1; i<tbl.rows[0].cells.length; i++){
+		nrProcesu += tbl.rows[0].cells[i].colSpan/7;
+		if (nrProcesu >= nrCzynnosci + 1){
+			if (tbl.rows[0].cells[i].colSpan == 7){ // Zmniejszenie Nazwy procesu
+				tbl.rows[0].deleteCell(i);
+			}
+			else{
+				tbl.rows[0].cells[i].colSpan -= 7;
+			}
+			break;
+		}
+	}
+
+	tbl.rows[1].deleteCell(nrCzynnosci);
+	for (var i = 0; i < 3; i++){
+		tbl.rows[2].deleteCell(nrCzynnosci*3);
+	}
+	for (var i = 0; i < 5; i++){
+		tbl.rows[3].deleteCell(nrCzynnosci*5);
+	}
+	for (var j = 0; j + 14 <= tbl.rows.length; j+=10){
+		for (var i = 0; i < 7; i++){
+			tbl.rows[j + 4].deleteCell(nrCzynnosci*7 + 1);
+		}
+		for (var k = 5; k < 14; k++){
+			for (var i = 0; i < 6; i++){
+				tbl.rows[j + k].deleteCell(nrCzynnosci*6);
+			}
+		}
+	}
+}
+
+function UsunCzynnosc() {
+	var czynnosc = prompt("Nazwa czynności do usunięcia:");
+	var nrCzynnosci = -1;
+
+	if (czynnosc == null){ // Użytkownik w komunikacie kliknął anuluj
+		return;
+	}
+
+	for (var i=0; i<tbl.rows[1].cells.length; i++){
+		if (tbl.rows[1].cells[i].querySelector("textarea").value == czynnosc){ // Szukanie czynności
+			nrCzynnosci = i;
+			break;
+		}
+	}
+
+	UsuwanieCzynnosci(nrCzynnosci);
+}
+
+function UsunProces() {
+	var proces = prompt("Nazwa procesu do usunięcia:");
+	var nrProcesu = -1;
+	var nrCzynnosci = 0;
+	var liczbaCzynnosci = 0;
+
+	if (proces == null){ // Użytkownik w komunikacie kliknął anuluj
+		return;
+	}
+
+	for (var i=1; i<tbl.rows[0].cells.length; i++){
+		if (tbl.rows[0].cells[i].querySelector("textarea").value == proces){ // Szukanie procesu
+			nrProcesu = i;
+			for (var j = i-1; j > 0; j--){
+				nrCzynnosci += tbl.rows[0].cells[j].colSpan/7;
+			}
+			break;
+		}
+	}
+
+	if (nrProcesu == -1){
+		alert("Nie znaleziono procesu!");
+		return;
+	}
+
+	liczbaCzynnosci = tbl.rows[0].cells[nrProcesu].colSpan/7;
+
+	for (var i = 0; i < liczbaCzynnosci; i++){
+		UsuwanieCzynnosci(nrCzynnosci);
+	}	
+}
+
+function UsunStanowisko() {
+	var stanowisko = prompt("Nazwa stanowiska do usunięcia:");
+	var wiersz = 0;
+
+	if (stanowisko == null){ // Użytkownik w komunikacie kliknął anuluj
+		return;
+	}
+
+	for (var i=4; i<tbl.rows.length; i += 10){
+		if (tbl.rows[i].cells[0].querySelector("textarea").value == stanowisko){ // Szukanie stanowiska do susunięcia
+			wiersz = i;
+			break;
+		}
+	}
+
+	if (wiersz == 0){
+		alert("Nie znaleziono stanowiska!");
+		return;
+	}
+
+	for (var i = 0; i < 10; i++) {
+		tbl.deleteRow(wiersz);
+	}
+	document.querySelector("select").remove((wiersz-4)/10);
+}
+
 document.querySelector("#openedMenu3 div:nth-child(1)").addEventListener("click", DodajCzynnosc, false); // Działa
 document.querySelector("#openedMenu2 div:nth-child(1)").addEventListener("click", DodajProces, false); // Działa
 document.querySelector("#openedMenu1 div:nth-child(1)").addEventListener("click", DodajStanowisko, false); // Działa
 
 document.querySelector("#openedMenu1 div:nth-child(5)").addEventListener("click", KopiujStanowisko, false); // Działa
+
+document.querySelector("#openedMenu3 div:nth-child(3)").addEventListener("click", UsunCzynnosc, false); // Działa
+document.querySelector("#openedMenu2 div:nth-child(3)").addEventListener("click", UsunProces, false); // Działa
+document.querySelector("#openedMenu1 div:nth-child(3)").addEventListener("click", UsunStanowisko, false); // Działa

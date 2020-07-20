@@ -133,11 +133,61 @@
         <td><textarea></textarea></td>
       </tr>
     </table>
+
+    <hr>
+
+    <div id="upowaznienie">
+      <div>
+        <input type="checkbox" class="checkbox" >
+        <label> Nazwa Zleceniodawcy </label>
+        <input type="text" class="input" placeholder="np.: Microsoft">
+      </div>
+      <div>
+        <input type="checkbox" class="checkbox">
+        <label> Tylko jedno stanowisko </label>
+        <select class="input">
+          <option>Stanowisko</option>
+        </select>
+      </div>
+      <div>
+        <input type="checkbox" class="checkbox">
+        <label> Data </label>
+        <input type="date" class="input">
+      </div>
+      <div>
+        <input type="checkbox" class="checkbox">
+        <label> Imię i nazwisko </label>
+        <input type="text" class="input" placeholder="np.: Jan Kowalski">
+      </div>
+      <div>
+        <input type="checkbox" class="checkbox">
+        <label> Numer upoważnienia </label>
+        <input type="number" class="input" value="1">
+        <label class="od"> Od: </label>
+      </div>
+      <div>
+        <input type="checkbox" class="checkbox">
+        <label> Miejscowość </label>
+        <input type="text" class="input" placeholder="np.: Warszawa">
+      </div>
+      <div>
+        <input type="checkbox" class="checkbox">
+        <label> Okres ważności </label>
+        <input type="date" class="input">
+        <label class="od"> Od: </label>
+      </div>
+    </div>
+
+    <button>Utwórz <br> upoważnienia</button>
+    
+    <hr>
+
   </main>
 
   <a href="backlog.html"><h2>BackLog<h2></a>
 
   <script src="header.js"></script>
+  <script src="upowaznienie.js"></script>
   <script src="table.js"></script>
 </body>
 </html>
