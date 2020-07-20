@@ -119,3 +119,39 @@ th textarea {
 .Czynnosc {
 	height: 60px;
 }
+
+/* HR */
+hr {
+	height: 2px;
+	background-color: darkgrey;
+	margin: 10px;
+	clear: both;
+}
+
+/* Upoważnienie */
+#upowaznienie {
+	font-size: 1.2em;
+	width: 500px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	margin-right: 20px;
+	float: left;
+}
+#upowaznienie div {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+#upowaznienie .input {
+	float: right;
+	width: 200px;
+	height: 22px;
+}
+#upowaznienie .od {
+	float: right;
+	margin-right: 10px;
+}
+button {
+	margin-top: 5px;
+	height: 184px;
+	width: 100px;
+}
